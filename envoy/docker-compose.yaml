@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  proxy:
+    image: envoyproxy/envoy-dev:latest
+    networks:
+      - envoymesh
+    expose:
+      - "8000"
+      - "8001"
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+    volumes:
+      - ./envoy.yaml:/etc/envoy/envoy.yaml
+      - ./lib/:/lib/lua:ro
+
+  web_service:
+    image: kennethreitz/httpbin:latest
+    networks:
+      envoymesh:
+        aliases:
+          - web_service
+    expose:
+      - "80"
+
+networks:
+  envoymesh: {}
