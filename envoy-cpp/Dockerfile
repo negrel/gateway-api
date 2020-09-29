@@ -17,9 +17,11 @@ RUN apt install -y curl gnupg && \
   mv bazel.gpg /etc/apt/trusted.gpg.d/ && \
   echo "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list && \
   apt update && apt install -y bazel-3.4.1 && apt full-upgrade && \
-  alias bazel="bazel-3.4.1" && \
+  ln -s $(which bazel-3.4.1) /usr/bin/bazel && \
   apt install -y python3 python3-pip cmake ninja-build && \
   alias Ninja="ninja" && \
   ln -s $(which python3) /usr/bin/python
+
+WORKDIR /envoy-filter-example
 
 RUN bazel build //:envoy
