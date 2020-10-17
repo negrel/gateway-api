@@ -1,0 +1,17 @@
+_format_version: "2.1"
+_transform: true
+
+services:
+- name: portfolio
+  url: https://www.negrel.dev
+  plugins:
+  - name: key-auth
+  routes:
+  - name: my-route
+    paths:
+    - /
+
+consumers:
+- username: my-user
+  keyauth_credentials:
+  - key: my-key
