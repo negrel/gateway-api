@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM envoyproxy/envoy-build-ubuntu:b480535e8423b5fd7c102fd30c92f4785519e33a
 
 # Configure tzdata and timezone
 ENV TZ=Europe/Paris
@@ -10,17 +10,6 @@ RUN apt update -y && \
 # Cloning envoy filter example
 RUN git clone https://github.com/envoyproxy/envoy-filter-example.git && \
   cd envoy-filter-example && git submodule update --init
-
-# Setting up Bazel and is dependencies
-RUN apt install -y curl gnupg && \
-  curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > bazel.gpg && \
-  mv bazel.gpg /etc/apt/trusted.gpg.d/ && \
-  echo "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list && \
-  apt update && apt install -y bazel-3.4.1 && apt full-upgrade && \
-  ln -s $(which bazel-3.4.1) /usr/bin/bazel && \
-  apt install -y python3 python3-pip cmake ninja-build && \
-  alias Ninja="ninja" && \
-  ln -s $(which python3) /usr/bin/python
 
 WORKDIR /envoy-filter-example
 
