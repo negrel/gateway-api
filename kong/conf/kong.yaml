@@ -2,14 +2,20 @@ _format_version: "2.1"
 _transform: true
 
 services:
-- name: portfolio
-  url: https://www.negrel.dev
-  plugins:
-  - name: key-auth
+- name: mockbin
+  url: http://mockbin.org/
   routes:
-  - name: my-route
-    paths:
-    - /
+    - name: route-1
+      paths:
+        - /mockbin
+        - /bin/mock
+- name: httpbin
+  url: http://httpbin/
+  routes:
+    - name: route-1
+      paths:
+        - /httpbin
+        - /bin/http
 
 consumers:
 - username: my-user

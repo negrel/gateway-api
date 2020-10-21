@@ -2,12 +2,24 @@ version: '3.8'
 services:
   kong:
     image: kong:latest
+    networks:
+      - kong-net
     ports:
       - "8000:8000"
       - "8443:8443"
       - "127.0.0.1:8001:8001"
       - "127.0.0.1:8444:8444"
     volumes:
-      - "./conf/:/usr/local/kong/declarative:ro"
+      - "./conf/kong.yaml:/usr/local/kong/declarative/kong.yaml:ro"
     env_file:
       - kong.env
+
+  httpbin:
+    image: kennethreitz/httpbin:latest
+    networks:
+      - kong-net
+    expose:
+      - "80"
+
+networks:
+  kong-net: {}
