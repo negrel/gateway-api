@@ -10,14 +10,25 @@ services:
         - /mockbin
         - /bin/mock
 - name: httpbin
-  url: http://httpbin/
+  url: http://httpbin/ # Our httpbin container
   routes:
     - name: route-1
       paths:
         - /httpbin
         - /bin/http
+        - /
+  plugins:
+    - name: basic-auth
+    # - name: key-auth
 
 consumers:
-- username: my-user
-  keyauth_credentials:
-  - key: my-key
+- username: negrel
+
+basicauth_credentials:
+  - consumer: negrel
+    username: negrel
+    password: lfdjIsAwesome
+
+keyauth_credentials:
+  - consumer: negrel
+    key: lfdjIsAwesome
