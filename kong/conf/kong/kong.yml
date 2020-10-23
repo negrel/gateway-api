@@ -7,7 +7,7 @@ plugins:
     service: httpbin
     config:
       hide_credentials: true
-
+  # - name: beta
 
 services:
   - name: mockbin

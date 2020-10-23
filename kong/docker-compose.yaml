@@ -11,7 +11,9 @@ services:
       - "127.0.0.1:8001:8001"
       - "127.0.0.1:8444:8444"
     volumes:
-      - "./conf/kong.yaml:/usr/local/kong/declarative/kong.yaml:ro"
+      - "./conf/kong/kong.conf:/etc/kong/kong.default.conf:ro"
+      - "./conf/kong/kong.yml:/usr/local/kong/declarative/kong.yml:ro"
+      - "./plugins/beta:/usr/local/share/lua/5.1/kong/plugins/beta:ro"
     env_file:
       - kong.env
 
