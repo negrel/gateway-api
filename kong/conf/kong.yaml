@@ -1,6 +1,10 @@
 _format_version: "2.1"
 _transform: true
 
+# Global plugin
+plugins:
+  - name: prometheus
+
 services:
 - name: mockbin
   url: http://mockbin.org/
