@@ -1,29 +1,30 @@
 _format_version: "2.1"
 _transform: true
 
-# Global plugin
 plugins:
   - name: prometheus
+  - name: basic-auth
+    service: httpbin
+    config:
+      hide_credentials: true
+
 
 services:
-- name: mockbin
-  url: http://mockbin.org/
-  routes:
-    - name: route-1
-      paths:
-        - /mockbin
-        - /bin/mock
-- name: httpbin
-  url: http://httpbin/ # Our httpbin container
-  routes:
-    - name: route-1
-      paths:
-        - /httpbin
-        - /bin/http
-        - /
-  plugins:
-    - name: basic-auth
-    # - name: key-auth
+  - name: mockbin
+    url: http://mockbin.org/
+    routes:
+      - name: route-1
+        paths:
+          - /mockbin
+          - /bin/mock
+  - name: httpbin
+    url: http://httpbin/ # Our httpbin container
+    routes:
+      - name: route-2
+        paths:
+          - /httpbin
+          - /bin/http
+          - /
 
 consumers:
 - username: negrel
