@@ -13,7 +13,8 @@ services:
     volumes:
       - "./conf/kong/kong.conf:/etc/kong/kong.conf:ro"
       - "./conf/kong/kong.yml:/usr/local/kong/declarative/kong.yml:ro"
-      - "./plugins/beta:/usr/local/share/lua/5.1/kong/plugins/beta:ro"
+
+      # - "./plugins/prometheus:/usr/local/share/lua/5.1/kong/plugins/prometheus:ro"
     env_file:
       - kong.env
 
@@ -23,7 +24,7 @@ services:
       - kong-net
     expose:
       - "80"
-  
+
   prometheus:
     image: prom/prometheus:latest
     ports:
